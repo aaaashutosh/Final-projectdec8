@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Aashutosh Calander</title>
+  <link rel="stylesheet" href="calen.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <script src="JS/dateprinting.js"></script>
+  <script src="JS/navigation.js"></script>
+</head>
+<nav>
+  <a href="index.html">Quiz Questions</a>
+        <a href="Calculator.html">Calculator</a>
+        <a href="calender.html">Calander</a>
+        <div class="button-container">
+            <a class="button-12" href="https://aashutoshkhatiwada.com.np/">GO TO Aashutosh Khatiwada</a>
+        </div>
+</nav>
+  <nav>
+    <div id="watch">
+        <div class="frame-face"></div>
+        <ul class="minute-marks">
+          <li></li><li></li><li></li><li></li><li></li><li></li>
+          <li></li><li></li><li></li><li></li><li></li><li></li>
+          <li></li><li></li><li></li><li></li><li></li><li></li>
+          <li></li><li></li><li></li><li></li><li></li><li></li>
+          <li></li><li></li><li></li><li></li><li></li><li></li>
+          <li></li><li></li><li></li><li></li><li></li><li></li>
+          <li></li><li></li><li></li><li></li><li></li><li></li>
+          <li></li><li></li><li></li><li></li><li></li><li></li>
+        </ul>
+        <div class="digital-wrap">
+          <ul class="digit-hours">
+            <li>23</li>
+            <li>00</li><li>01</li><li>02</li><li>03</li><li>04</li><li>05</li>
+            <li>06</li><li>07</li><li>08</li><li>09</li><li>10</li><li>11</li>
+            <li>12</li><li>13</li><li>14</li><li>15</li><li>16</li><li>17</li>
+            <li>18</li><li>19</li><li>20</li><li>21</li><li>22</li>
+          </ul>
+          <ul class="digit-minutes">
+            <li>10</li><li>11</li>
+            <li>12</li><li>13</li><li>14</li><li>15</li><li>16</li><li>17</li>
+            <li>18</li><li>19</li><li>20</li><li>21</li><li>22</li><li>23</li>
+            <li>24</li><li>25</li><li>26</li><li>27</li><li>28</li><li>29</li>
+            <li>30</li><li>31</li><li>32</li><li>33</li><li>34</li><li>35</li>
+            <li>36</li><li>37</li><li>38</li><li>39</li><li>40</li><li>41</li>
+            <li>42</li><li>43</li><li>44</li><li>45</li><li>46</li><li>47</li>
+            <li>48</li><li>49</li><li>50</li><li>51</li><li>52</li><li>53</li>
+            <li>54</li><li>55</li><li>56</li><li>57</li><li>58</li><li>59</li>
+            <li>00</li><li>01</li><li>02</li><li>03</li><li>04</li><li>05</li>
+            <li>06</li><li>07</li><li>08</li><li>09</li>
+          </ul>
+          <ul class="digit-seconds">
+            <li>20</li><li>21</li><li>22</li><li>23</li>
+            <li>24</li><li>25</li><li>26</li><li>27</li><li>28</li><li>29</li>
+            <li>30</li><li>31</li><li>32</li><li>33</li><li>34</li><li>35</li>
+            <li>36</li><li>37</li><li>38</li><li>39</li><li>40</li><li>41</li>
+            <li>42</li><li>43</li><li>44</li><li>45</li><li>46</li><li>47</li>
+            <li>48</li><li>49</li><li>50</li><li>51</li><li>52</li><li>53</li>
+            <li>54</li><li>55</li><li>56</li><li>57</li><li>58</li><li>59</li>
+            <li>00</li><li>01</li><li>02</li><li>03</li><li>04</li><li>05</li>
+            <li>06</li><li>07</li><li>08</li><li>09</li><li>10</li><li>11</li>
+            <li>12</li><li>13</li><li>14</li><li>15</li><li>16</li><li>17</li>
+            <li>18</li><li>19</li>
+          </ul>
+        </div>
+        <ul class="digits">
+          <li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li>
+          <li>7</li><li>8</li><li>9</li><li>10</li><li>11</li><li>12</li>
+        </ul>
+        <div class="hours-hand"></div>
+        <div class="minutes-hand"></div>
+        <div class="seconds-hand"></div>
+        <script>  function updateClock() {
+          var now = new Date();
+    
+          var hours = now.getHours();
+          var minutes = now.getMinutes();
+          var seconds = now.getSeconds();
+    
+          // Update digital clock
+          document.querySelector('.digit-hours li').textContent = padZero(hours);
+          document.querySelector('.digit-minutes li').textContent = padZero(minutes);
+          document.querySelector('.digit-seconds li').textContent = padZero(seconds);
+    
+          // Rotate clock hands
+          var hoursHand = document.querySelector('.hours-hand');
+          var minutesHand = document.querySelector('.minutes-hand');
+          var secondsHand = document.querySelector('.seconds-hand');
+    
+          var hoursRotation = (360 / 12) * (hours % 12) + (360 / 12) * (minutes / 60);
+          var minutesRotation = (360 / 60) * minutes + (360 / 60) * (seconds / 60);
+          var secondsRotation = (360 / 60) * seconds;
+    
+          hoursHand.style.transform = 'rotate(' + hoursRotation + 'deg)';
+          minutesHand.style.transform = 'rotate(' + minutesRotation + 'deg)';
+          secondsHand.style.transform = 'rotate(' + secondsRotation + 'deg)';
+        }
+    
+        function padZero(num) {
+          return (num < 10 ? '0' : '') + num;
+        }
+    
+        // Update clock every second
+        setInterval(updateClock, 1000);
+    
+        // Initial update
+        updateClock();</script>
+      </div>
+  </nav>
+<body onload="init();">
+  
+  <div class="infodot">i</div>
+  
+  <div class="info-overlay">
+    <div class="overlay-box">
+      
+      <div class="boxtitle">Aashutosh's Calendar</div>
+      <div class="copyright">&copy;aashutoshkhatiwada2024. All rights reserved.</div>
+      <div class="version">Latest Version 2.0</div>
+      <div class="boxdesc"><span class="bold">What's new in 2.0:</span><br />&bull; New Algorithm (no longer using Datejs library)<br /><span class="bold">Future updates:</span><br />&bull; Events note<br> </div>
+      
+    </div>
+  </div>
+  
+  <div class="calendarheight">
+  <div class="outerborder">
+  <div style="height: 10px"></div>
+<table>
+  <tr><div class="month">
+    <div class="monthcenter"></div>
+    </div>
+    <div class="yearshow"></div>
+  </tr>
+  <div style="height: 10px"></div>
+  <tr style="padding-bottom: 10px;">
+    <div class="weekdaybg">
+    <div class="weekday" ID="sun">Sun</div>
+    <div class="weekday" ID="mon">Mon</div>
+    <div class="weekday" ID="tue">Tue</div>
+    <div class="weekday" ID="wed">Wed</div>
+    <div class="weekday" ID="thu">Thu</div>
+    <div class="weekday" ID="fri">Fri</div>
+    <div class="weekday" ID="sat">Sat</div>
+    </div>
+  </tr>
+  <tr>
+    <td class="day" ID="one1"></td>
+    <td class="day" ID="one2"></td>
+    <td class="day" ID="one3"></td>
+    <td class="day" ID="one4"></td>
+    <td class="day" ID="one5"></td>
+    <td class="day" ID="one6"></td>
+    <td class="day" ID="one7"></td>
+  </tr>
+  <tr>
+    <td class="day" ID="two1"></td>
+    <td class="day" ID="two2"></td>
+    <td class="day" ID="two3"></td>
+    <td class="day" ID="two4"></td>
+    <td class="day" ID="two5"></td>
+    <td class="day" ID="two6"></td>
+    <td class="day" ID="two7"></td>
+  </tr>
+  <tr>
+    <td class="day" ID="three1"></td>
+    <td class="day" ID="three2"></td>
+    <td class="day" ID="three3"></td>
+    <td class="day" ID="three4"></td>
+    <td class="day" ID="three5"></td>
+    <td class="day" ID="three6"></td>
+    <td class="day" ID="three7"></td>
+  </tr>
+  <tr>
+    <td class="day" ID="four1"></td>
+    <td class="day" ID="four2"></td>
+    <td class="day" ID="four3"></td>
+    <td class="day" ID="four4"></td>
+    <td class="day" ID="four5"></td>
+    <td class="day" ID="four6"></td>
+    <td class="day" ID="four7"></td>
+  </tr>
+  <tr>
+    <td class="day" ID="five1"></td>
+    <td class="day" ID="five2"></td>
+    <td class="day" ID="five3"></td>
+    <td class="day" ID="five4"></td>
+    <td class="day" ID="five5"></td>
+    <td class="day" ID="five6"></td>
+    <td class="day" ID="five7"></td>
+  </tr>
+  <tr class="extraweek">
+    <td class="day" ID="six1"></td>
+    <td class="day" ID="six2"></td>
+    <td class="day" ></td>
+    <td class="day"></td>
+    <td class="day"></td>
+    <td class="day"></td>
+    <td class="day"></td>
+  </tr>
+</table>
+    <div style="height: 10px"></div>
+  </div>
+  </div>
+  
+  <div style="height: 10px"></div>
+  
+  
+  <div style="text-align: center; font-size: 30px;">&LeftArrow; Previous||............Months.................||Next &rightarrow;</div>
+  <div class="monthscroll">
+    <div class="scrollback">&larr;</div>
+    <div class="scrollforward">&rarr;</div>
+
+   <div class="searchdate">
+    <input class="imonth" placeholder="Month(1-12)"></input>
+    <input class="iyear" placeholder="Year"></input>
+    <div class="monthsearch">Go</div>
+  
+</body>
+</html>
